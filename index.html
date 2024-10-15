@@ -1,9 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style src="../project-quiz-900/style.css"></style>
-</head>
-<body>
-<script src="../project-quiz-900/script.js"></script>
-</body>
+  <head>
+    <title>Nav's Quiz App</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="boxview">
+      <h1>Nav's Quiz App</h1>
+      <p id="scoreDisplay">Question: 1 | Score: 0</p>
+      <div id="question">
+        <p class="questions">What is the capital of New Zealand?</p>
+      </div>
+      <div class="Q">
+        <div>
+          <button class="Option" id="option1" onclick="selectOption(1)">
+            option1
+          </button>
+        </div>
+        <div>
+          <button class="Option" id="option2" onclick="selectOption(2)">
+            option2
+          </button>
+        </div>
+        <div>
+          <button class="Option" id="option3" onclick="selectOption(3)">
+            option3
+          </button>
+        </div>
+        <div>
+          <button class="Option" id="option4" onclick="selectOption(4)">
+            option4
+          </button>
+        </div>
+      </div>
+      <div>
+        <button class="Submit" id="submit" onclick="handleNext()">
+          Submit Answer
+        </button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
