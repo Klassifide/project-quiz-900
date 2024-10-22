@@ -74,6 +74,7 @@ const option3El = document.getElementById("option3");
 const option4El = document.getElementById("option4");
 const submitButton = document.getElementById("submit");
 const scoreDisplay = document.getElementById("scoreDisplay");
+const restartButton = document.getElementById("restart");
 
 function loadQuestion() {
   const currentQuestion = questions[currentQuestionIndex];
@@ -83,9 +84,10 @@ function loadQuestion() {
   option3El.innerText = currentQuestion.options[2];
   option4El.innerText = currentQuestion.options[3];
 
+  // Reset option styles
   document.querySelectorAll(".Option").forEach((option) => {
     option.style.backgroundColor = "";
-    option.classList.remove("correct", "incorrect");
+    option.classList.remove("correct", "incorrect", "selected");
   });
 
   selectedAnswer = null;
@@ -94,9 +96,10 @@ function loadQuestion() {
 }
 
 function selectOption(optionIndex) {
-  const options = [option1, option2, option3, option4];
+  const options = [option1El, option2El, option3El, option4El];
   selectedAnswer = questions[currentQuestionIndex].options[optionIndex - 1];
 
+  // Deselect previous options and highlight selected one
   options.forEach((option) => option.classList.remove("selected"));
   options[optionIndex - 1].classList.add("selected");
 }
@@ -129,7 +132,7 @@ function checkAnswer() {
   didSubmitAnswer = true;
 }
 
-function handleNext() {
+function handlerNext() {
   if (!didSubmitAnswer) {
     checkAnswer();
   } else {
@@ -137,11 +140,35 @@ function handleNext() {
     if (currentQuestionIndex < questions.length) {
       loadQuestion();
     } else {
-      alert(`Quiz finished! Final score: ${score}`);
+      scoreDisplay.innerText = `Quiz finished! F F F FU FFFU FUU! Final score: ${score}`;
+      submitButton.style.display = "none";  // Hide the submit button
+      restartButton.style.display = "block";  // Show the restart button
     }
   }
 }
 
-loadQuestion();
-
 function restartQuiz() {
+  currentQuestionIndex = 0;
+  score = 0;
+  didSubmitAnswer = false;
+  submitButton.style.display = "block";  // Show the submit button again
+  restartButton.style.display = "none";  // Hide the restart button
+  scoreDisplay.innerText = `Question: 1 | Score: 0`;
+  loadQuestion();
+}
+
+// Adding event listeners to the options
+document.querySelectorAll(".Option").forEach((option, index) => {
+  option.addEventListener("click", () => selectOption(index + 1));
+});
+
+// Adding event listener for submit button
+submitButton.addEventListener("click", handlerNext);
+
+// Adding event listener for restart button
+restartButton.addEventListener("click", restartQuiz);
+
+// Initial state: hide the restart button
+restartButton.style.display = "none";
+
+loadQuestion();

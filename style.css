@@ -54,3 +54,17 @@
   .incorrect {
     background-color: red;
   }
+
+  #restart {
+    display: flex;
+    align-items: flex-start;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid black;
+    margin: 10px;
+    border-radius: 8px;
+    background-color: whitesmoke;
+    color: black;
+    font-size: 18px;
+    border-width: 2px;
+  }
